@@ -40,7 +40,7 @@ public class NewCustomer extends LoginAutomation {
 
         WebElement CPhone=driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > tbody > tr:nth-child(11) > td:nth-child(2) > input[type=text]"));
         CPhone.clear();
-        CPhone.sendKeys("01710000000");
+        CPhone.sendKeys("017100000AA");
 
         WebElement CEmail=driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > tbody > tr:nth-child(12) > td:nth-child(2) > input[type=text]"));
         CEmail.clear();
@@ -49,14 +49,17 @@ public class NewCustomer extends LoginAutomation {
         WebElement CSubmit=driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > tbody > tr:nth-child(13) > td:nth-child(2) > input[type=submit]:nth-child(1)"));
         CSubmit.click();
 
-        String expected="http://demo.guru99.com/V1/html/insrtCustomer.php";
-        String actual=driver.getCurrentUrl();
+        WebElement popUp = driver.findElement(By.xpath("xpath of the popup"));
 
-        if(expected.equals(actual)){
-            System.out.println("Passed");
+        if (popUp.isDisplayed())
+        {
+            WebElement btnOk = driver.findElement(By.xpath("xpath of the button in alert"));
+            btnOk.click();
+            System.out.println("Pop up displayed and button clicked");
         }
-        else {
-            System.out.println("Failed");
+        else
+        {
+            System.out.println("Pop up Not found");
         }
     }
 
