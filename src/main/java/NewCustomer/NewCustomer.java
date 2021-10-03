@@ -1,7 +1,9 @@
 package NewCustomer;
 
 import LoginAutomation.LoginAutomation;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 
 public class NewCustomer extends LoginAutomation {
@@ -40,7 +42,7 @@ public class NewCustomer extends LoginAutomation {
 
         WebElement CPhone=driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > tbody > tr:nth-child(11) > td:nth-child(2) > input[type=text]"));
         CPhone.clear();
-        CPhone.sendKeys("017100000AA");
+        CPhone.sendKeys("0171000A 0000");
 
         WebElement CEmail=driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > tbody > tr:nth-child(12) > td:nth-child(2) > input[type=text]"));
         CEmail.clear();
@@ -49,18 +51,26 @@ public class NewCustomer extends LoginAutomation {
         WebElement CSubmit=driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > tbody > tr:nth-child(13) > td:nth-child(2) > input[type=submit]:nth-child(1)"));
         CSubmit.click();
 
-        WebElement popUp = driver.findElement(By.xpath("xpath of the popup"));
+        /*
+        String expected="Please fill all fields";
+        String actual=driver.switchTo().alert().getText();
 
-        if (popUp.isDisplayed())
-        {
-            WebElement btnOk = driver.findElement(By.xpath("xpath of the button in alert"));
-            btnOk.click();
-            System.out.println("Pop up displayed and button clicked");
+        if(expected.equals(actual)){
+            System.out.println("Passed");
         }
-        else
-        {
-            System.out.println("Pop up Not found");
+        else {
+            System.out.println("Failed");
         }
+        */
+        try{
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+            System.out.println("Alert Displayed");
+        }
+        catch (NoAlertPresentException ex){
+            System.out.println("Alert is NOT Displayed");
+        }
+
     }
 
 }
